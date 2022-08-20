@@ -1,0 +1,26 @@
+body {
+  margin: 50px;
+  text-align: center;
+  font-size: large;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+.django-two {
+  padding: 30px;
+  position: relative;
+  margin: auto;
+  display: block;
+}
+
+.django-two > table,
+td,
+th {
+  padding: 15px;
+  border: 1px solid gray;
+  table-layout: fixed;
+}
+
+.django-two > table > tbody > td {
+  border: 1px solid gray;
+}
