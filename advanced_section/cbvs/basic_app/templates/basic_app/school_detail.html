@@ -1,0 +1,24 @@
+{% extends 'basic_app/basic_app_base.html' %} {% block body_block %}
+<div>
+  <h1>Welcome to the shool detail page</h1>
+  <h2>Shool detail:</h2>
+  <p>Name: {{ school_detail.name }}</p>
+  <p>Principal: {{ school_detail.principal }}</p>
+  <p>Location: {{ school_detail.location }}</p>
+  <ul>
+    {% for student in school_detail.students.all %}
+    <li>{{student.name}} who is {{student.age}} years old.</li>
+    {% endfor %}
+  </ul>
+</div>
+<div class="container">
+  <p>
+    <a
+      class="btn btn-warning"
+      href="{% url 'basic_app:update_school' pk=school_detail.pk %}"
+      >Update</a
+    >
+  </p>
+</div>
+
+{% endblock body_block %}
