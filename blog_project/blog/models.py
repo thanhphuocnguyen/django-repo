@@ -1,12 +1,10 @@
-from pyexpat import model
-from turtle import title
 from django.db import models
 from django.utils import timezone
 from django.urls import reverse
 
 
 class Post(models.Model):
-    author = models.ForeignKey('auth.User')
+    author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     content = models.TextField()
     created_at = models.DateTimeField(default=timezone.now())
@@ -26,7 +24,9 @@ class Post(models.Model):
 
 # Create your models here.
 class Comment(models.Model):
-    post = models.ForeignKey('blog.Post', related_name='comments')
+    post = models.ForeignKey('blog.Post',
+                             related_name='comments',
+                             on_delete=models.CASCADE)
     author = models.CharField(max_length=200)
     content = models.TextField()
     created_at = models.DateTimeField(default=timezone.now())
