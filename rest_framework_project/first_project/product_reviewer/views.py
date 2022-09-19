@@ -1,10 +1,11 @@
 from django.shortcuts import render
 from rest_framework.viewsets import ReadOnlyModelViewSet
-from .serializers import ProductSerializer
+from .serializers import ImageSerializer, ProductSerializer
 from rest_framework.decorators import action
-from .models import Product
-from rest_flex_fields.views import FlexFieldsMixin
+from .models import Image, Product
+from rest_flex_fields.views import FlexFieldsMixin, FlexFieldsModelViewSet
 from django_filters import rest_framework as filters
+from rest_framework.permissions import IsAuthenticated
 
 from rest_flex_fields import is_expanded
 
@@ -47,3 +48,10 @@ class ProductViewSet(ReadOnlyModelViewSet, FlexFieldsMixin):
     @action(detail=True, methods=['post', 'delete'])
     def delete_product(self, request, pk=None):
         pass
+
+
+class ImageViewSet(FlexFieldsModelViewSet):
+
+    serializer_class = ImageSerializer
+    queryset = Image.objects.all()
+    permission_classes = [IsAuthenticated]

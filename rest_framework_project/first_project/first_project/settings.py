@@ -39,17 +39,23 @@ INSTALLED_APPS = [
     'basic_app',
     'product_reviewer',
     'django_filters',
+    'corsheaders',
     'versatileimagefield',
 ]
 
 REST_FRAMEWORK = {
-    'DefDEFAULT_FILTER_BACKENDS':
-    ['django_filters.rest_framework.DjangoFilterBackend']
+    'DefDEFAULT_FILTER_BACKENDS': [
+        'django_filters.rest_framework.DjangoFilterBackend',
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
 }
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -132,3 +138,22 @@ MEDIA_ROOT = Path.joinpath(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+VERSATILEIMAGEFIELD_RENDITION_KEY_SETS = {
+    'product_headshot': [('full_size', 'url'),
+                         ('thumbnail', 'thumbnail__100x100'),
+                         ('medium_square_crop', 'crop__400x400'),
+                         ('small_square_crop', 'crop__50x50')]
+}
+
+CORS_ALLOWED_ORIGINS = [
+    "https://www.safesite.com",
+]
+
+CORS_ALLOW_ALL_ORIGINS = True
+
+CSRF_TRUSTED_ORIGINS = [
+    'www.safesite.com',
+]
+
+CORS_ALLOW_CREDENTIALS = True

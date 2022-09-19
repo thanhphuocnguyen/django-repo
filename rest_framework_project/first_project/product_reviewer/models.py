@@ -86,7 +86,10 @@ class Comment(models.Model):
 
 
 class CustomerReportRecord(models.Model):
-    time_raised = models.DateTimeField(default=timezone.now(), editable=False)
+    time_raised = models.DateTimeField(
+        default=timezone.now,
+        editable=False,
+    )
     reference = models.CharField(unique=True, max_length=20)
     description = models.TextField()
 

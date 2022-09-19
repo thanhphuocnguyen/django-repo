@@ -1,9 +1,10 @@
 from rest_framework import serializers
-from .models import (Product, CustomerReportRecord, Cateogry, ProductSite,
-                     ProductSize, Comment, Company)
+from .models import (Image, Product, CustomerReportRecord, Cateogry,
+                     ProductSite, ProductSize, Comment, Company)
 from django.contrib.auth.models import User
 from django.utils.timezone import now
 from rest_flex_fields import FlexFieldsModelSerializer
+from versatileimagefield.serializers import VersatileImageFieldSerializer
 
 
 class CompanySerializer(FlexFieldsModelSerializer):
@@ -41,6 +42,9 @@ class ProductSerializer(FlexFieldsModelSerializer):
             'comments': ('product_reviewer.CommentSerializer', {
                 'many': True
             }),
+            'image': ('product_reviewer.ImageSerializer', {
+                'many': True
+            })
         }
 
 
@@ -94,3 +98,11 @@ class CustomerReportSerializer(FlexFieldsModelSerializer):
     class Meta:
         model = CustomerReportRecord
         fields = '__all__'
+
+
+class ImageSerializer(FlexFieldsModelSerializer):
+    image = VersatileImageFieldSerializer(sizes='product_headshot')
+
+    class Meta:
+        model = Image
+        fields = ('pk', 'name', 'image')
