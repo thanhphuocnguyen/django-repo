@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from rest_framework.viewsets import ReadOnlyModelViewSet
 from .serializers import ImageSerializer, ProductSerializer
 from rest_framework.decorators import action
@@ -6,7 +5,6 @@ from .models import Image, Product
 from rest_flex_fields.views import FlexFieldsMixin, FlexFieldsModelViewSet
 from django_filters import rest_framework as filters
 from rest_framework.permissions import IsAuthenticated
-
 from rest_flex_fields import is_expanded
 
 
